@@ -1,19 +1,24 @@
-# YARUKI ZERO - やる気グラフ（全部ゼロ）
+# README
 
-![screenshot](./screenshot.png)
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## 概要
+Things you may want to cover:
 
-「やる気」を記録するアプリ…なのに、**グラフにはすべてゼロで表示される**という完全ネタ系モチベーショントラッカーです。  
-それでも記録は残り、皮肉なコメントがあなたを優しく煽ってくれます。
+* Ruby version
 
----
+* System dependencies
 
-## 使用技術
+* Configuration
 
-- Ruby on Rails 7
-- PostgreSQL（Docker構成）
-- Tailwind CSS
-- Chart.js
-- Devise + OmniAuth（Google認証）
-- ActionMailer（登録時 or 毎朝レポート送信）
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
