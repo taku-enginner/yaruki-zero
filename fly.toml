@@ -1,0 +1,10 @@
+app = "yaruki-zero"  # ← 自分のアプリ名に置き換えて！
+
+[build]
+ dockerfile = "Dockerfile.dev"  # ← Dockerfile名に合わせて調整
+
+[env]
+RAILS_ENV = "production"
+
+[deploy]
+release_command = "bin/rails db:prepare"
