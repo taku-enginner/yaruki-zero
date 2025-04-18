@@ -36,19 +36,29 @@
       <div class="bg-white shadow-lg rounded-3xl p-12">
         <%= yield %>
       </div>
-      <!-- やる気グラフ -->
-      <div class="bg-white shadow-lg rounded-3xl p-12">
-        <h2 class="text-xl font-semibold text-center mb-6">やる気の推移</h2>
-        <canvas
-          id="motivationChart"
-          width="400"
-          height="200"
-          data-labels="<%= @motivations.map(&:recorded_on).map(&:to_s).to_json %>"
-          data-values="<%= @motivations.map(&:value).to_json %>"
-        ></canvas>
-      </div>
-
     </main>
+    <!-- フッター -->
+    <footer class="fixed bottom-0 w-full bg-white border-t flex justify-around py-2 shadow z-50">
+      <%= link_to new_motivation_path, class: "flex flex-col items-center text-xs text-gray-500 hover:text-blue-600" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        記録
+      <% end %>
 
+      <%= link_to graph_path, class: "flex flex-col items-center text-xs text-gray-500 hover:text-blue-600" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m4 0V9a2 2 0 012-2h2a2 2 0 012 2v8" />
+        </svg>
+        グラフ
+      <% end %>
+
+      <%= link_to "#", class: "flex flex-col items-center text-xs text-gray-500 hover:text-blue-600" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 100 7.292M15 12a3 3 0 010 6m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        設定
+      <% end %>
+    </footer>
   </body>
 </html>

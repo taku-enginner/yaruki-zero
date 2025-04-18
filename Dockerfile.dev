@@ -30,3 +30,5 @@ RUN gem install bundler && bundle install
 COPY . /myapp
 
 RUN chmod +x /myapp/entrypoint.sh
+
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]

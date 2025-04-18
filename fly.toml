@@ -8,3 +8,26 @@ RAILS_ENV = "production"
 
 [deploy]
 release_command = "bin/rails db:prepare"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "30s"  # ← 初期起動に時間かかる場合は増やす
+    restart_limit = 0

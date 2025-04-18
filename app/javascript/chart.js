@@ -1,9 +1,13 @@
-// app/javascript/chart.js
 import Chart from "chart.js/auto";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const ctx = document.getElementById("motivationChart");
   if (!ctx) return;
+
+  // すでにチャートが存在している場合は破棄（再描画のため）
+  if (ctx.chartInstance) {
+    ctx.chartInstance.destroy();
+  }
 
   const chart = new Chart(ctx, {
     type: "line",
@@ -25,4 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  // チャートインスタンスを DOM に保持（次回破棄のため）
+  ctx.chartInstance = chart;
 });
