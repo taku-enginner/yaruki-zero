@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     entrypoint: /myapp/entrypoint.sh
-    command: ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+    command: "./bin/dev"
     tty: true
     stdin_open: true
     volumes:

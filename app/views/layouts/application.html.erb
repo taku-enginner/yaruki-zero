@@ -18,9 +18,37 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
+  <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col items-center justify-center">
+
+    <!-- Flashメッセージ -->
+    <div class="w-full max-w-md px-4 mt-8">
+    
+      <% flash.each do |type, message| %>
+        <div id="flash_<%= type %>" class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded shadow-md mb-4 text-center text-lg font-semibold">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <main class="w-full max-w-2xl px-6 py-16 space-y-12">
+      <!-- やる気入力フォーム -->
+      <div class="bg-white shadow-lg rounded-3xl p-12">
+        <%= yield %>
+      </div>
+      <!-- やる気グラフ -->
+      <div class="bg-white shadow-lg rounded-3xl p-12">
+        <h2 class="text-xl font-semibold text-center mb-6">やる気の推移</h2>
+        <canvas
+          id="motivationChart"
+          width="400"
+          height="200"
+          data-labels="<%= @motivations.map(&:recorded_on).map(&:to_s).to_json %>"
+          data-values="<%= @motivations.map(&:value).to_json %>"
+        ></canvas>
+      </div>
+
     </main>
+
   </body>
 </html>

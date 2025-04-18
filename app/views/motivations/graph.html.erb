@@ -1,0 +1,9 @@
+<h2 class="text-xl font-semibold text-center mb-6">やる気の推移</h2>
+
+<canvas
+  id="motivationChart"
+  width="400"
+  height="200"
+  data-labels="<%= @motivations.map(&:recorded_on).map(&:to_s).to_json %>"
+  data-values="<%= @motivations.map(&:value).to_json %>"
+></canvas>
