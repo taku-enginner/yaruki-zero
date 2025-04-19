@@ -61,3 +61,6 @@ gem "tailwindcss-rails"
 gem "tailwindcss-ruby", "3.4.17"
 gem "whenever", require: false
 gem "dockerfile-rails", ">= 1.7", :group => :development
+gem "devise"
+gem "omniauth-google-oauth2"
+gem "devise-i18n"

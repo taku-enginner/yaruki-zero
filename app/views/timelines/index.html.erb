@@ -1,0 +1,11 @@
+<h2 class="text-xl font-semibold mb-4">みんなのゼロ記録</h2>
+
+<ul class="space-y-4">
+  <% @motivations.each do |m| %>
+    <li class="bg-white p-4 rounded shadow text-sm text-gray-700">
+      <span class="font-bold"><%= m.user&.email&.split("@")&.first || "匿名" %></span>：
+      <%= m.comment %>
+      <span class="text-gray-400 text-xs ml-2"><%= m.recorded_on.strftime("%Y-%m-%d") %></span>
+    </li>
+  <% end %>
+</ul>

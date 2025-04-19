@@ -19,24 +19,45 @@
   </head>
 
   <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col items-center justify-center">
-
     <!-- Flashメッセージ -->
-    <div class="w-full max-w-md px-4 mt-8">
-    
-      <% flash.each do |type, message| %>
-        <div id="flash_<%= type %>" class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded shadow-md mb-4 text-center text-lg font-semibold">
+    <% flash.each do |type, message| %>
+      <div class="w-full max-w-md px-4">
+        <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-lg shadow text-center font-medium mb-6">
           <%= message %>
         </div>
-      <% end %>
-    </div>
-
-    <!-- メインコンテンツ -->
-    <main class="w-full max-w-2xl px-6 py-16 space-y-12">
-      <!-- やる気入力フォーム -->
-      <div class="bg-white shadow-lg rounded-3xl p-12">
-        <%= yield %>
       </div>
-    </main>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <div class="text-center text-sm text-gray-600 mt-6">
+        <%= @greeting_message.gsub("◯◯", current_user.name || current_user.email.split("@").first) %>
+      </div>
+
+      <div class="mt-2 mb-4">
+        <%= button_to "ログアウト", destroy_user_session_path,
+            method: :delete,
+            data: { confirm: "ログアウトしますか？" },
+            class: "px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition" %>
+      </div>
+    <% else %>
+      <div class="text-center text-sm text-gray-600 mt-6">
+        <%= @guest_message %>
+      </div>
+      <div class="mt-8">
+        <%= link_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path,
+            method: :post,
+            data: { turbo: false },
+            class: "px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition" %>
+      </div>
+    <% end %>
+
+
+  <!-- メインコンテンツ -->
+  <main class="w-full max-w-2xl px-6 py-16 space-y-12">
+    <div class="bg-white shadow-lg rounded-3xl p-12">
+      <%= yield %>
+    </div>
+  </main>
     <!-- フッター -->
     <footer class="fixed bottom-0 w-full bg-white border-t flex justify-around py-2 shadow z-50">
       <%= link_to new_motivation_path, class: "flex flex-col items-center text-xs text-gray-500 hover:text-blue-600" do %>
@@ -53,7 +74,7 @@
         グラフ
       <% end %>
 
-      <%= link_to "#", class: "flex flex-col items-center text-xs text-gray-500 hover:text-blue-600" do %>
+      <%= link_to settings_path, class: "flex flex-col items-center text-xs text-gray-500 hover:text-blue-600" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 100 7.292M15 12a3 3 0 010 6m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
